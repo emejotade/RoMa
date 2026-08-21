@@ -306,19 +306,15 @@ body {
     translate(-50%, -50%);
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   color: #e9cb8d;
-
-  /* Nueva tipografía */
   font-family: 'Cormorant Garamond', serif;
-  font-size: 27px;
+  font-size: 28px;
   font-style: italic;
   font-weight: 500;
-
-  /* Separación elegante entre las iniciales */
-  letter-spacing: 1px;
 
   background:
     radial-gradient(
@@ -338,9 +334,6 @@ body {
     opacity .45s ease;
 }
 
-
-/* Borde interior del lacre */
-
 .wax:before {
   content: "";
 
@@ -354,20 +347,12 @@ body {
     1px solid rgba(242,207,151,.58);
 }
 
-
-/* Iniciales M&R */
-
 .wax span {
   position: relative;
 
   z-index: 2;
-
-  transform:
-    translateY(-1px);
-
-  text-shadow:
-    0 1px 1px rgba(255,255,255,.18);
 }
+
 /* ==================================================
    TEXTO "PULSE EL SOBRE"
 ================================================== */
@@ -990,7 +975,7 @@ const envelope =
 
 
 function openInvitation() {
-  
+
   scene.classList.add('opened');
 
 }
@@ -1021,5 +1006,6 @@ envelope.addEventListener(
 );
 
 </script>
+
 </body>
 </html>
