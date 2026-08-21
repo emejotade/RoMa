@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marc & Rosa</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Montserrat:wght@400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: #eee6da;
+  color: #5d4730;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* ==================================================
+   FONDO
+================================================== */
+
+.scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      rgba(245, 237, 225, 0.18),
+      rgba(245, 237, 225, 0.18)
+    ),
+    url("assets/imagen1.png");
+
+  background-size: cover;
+  background-position: center;
+}
+
+/* ==================================================
+   SOBRE
+================================================== */
+
+.envelope-wrap {
+  position: relative;
+
+  width: min(88vw, 520px);
+
+  z-index: 5;
+
+  perspective: 1800px;
+
+  transition:
+    transform 1s cubic-bezier(.16,.8,.2,1);
+}
+
+.envelope {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1.55;
+
+  transform-style: preserve-3d;
+
+  filter:
+    drop-shadow(
+      0 30px 28px rgba(70,49,30,.25)
+    );
+}
+
+/* ==================================================
+   CUERPO DEL SOBRE
+================================================== */
+
+.body {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fbf5ec,
+      #e4d7c8
+    );
+
+  overflow: hidden;
+}
+
+.body:after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      35deg,
+      transparent 49.5%,
+      rgba(120,90,60,.13) 50%,
+      transparent 50.5%
+    ),
+    linear-gradient(
+      145deg,
+      transparent 49.5%,
+      rgba(120,90,60,.11) 50%,
+      transparent 50.5%
+    );
+}
+
+/* ==================================================
+   INVITACIÓN DENTRO DEL SOBRE
+================================================== */
+
+.card-inside {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 7%;
+  right: 7%;
+  top: 8%;
+  bottom: 4%;
+
+  background: #fffaf1;
+
+  border-radius: 3px;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transform:
+    translateY(35%);
+
+  transition:
+    transform 1.25s cubic-bezier(.16,.82,.2,1) .55s,
+    opacity .65s ease .55s;
+}
+
+.card-inside img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+/* ==================================================
+   PLIEGUES DEL SOBRE
+================================================== */
+
+.fold-left,
+.fold-right,
+.fold-bottom {
+  position: absolute;
+
+  z-index: 4;
+
+  bottom: 0;
+
+  background: #e9ddce;
+}
+
+.fold-left {
+  left: 0;
+
+  width: 52%;
+  height: 74%;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+.fold-right {
+  right: 0;
+
+  width: 52%;
+  height: 74%;
+
+  clip-path:
+    polygon(
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+}
+
+.fold-bottom {
+  left: 0;
+  right: 0;
+
+  height: 76%;
+
+  background: #f0e6da;
+
+  clip-path:
+    polygon(
+      0 100%,
+      50% 0,
+      100% 100%
+    );
+}
+
+/* ==================================================
+   SOLAPA
+================================================== */
+
+.flap {
+  position: absolute;
+
+  z-index: 8;
+
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 67%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff9f0,
+      #eee2d3
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
+  transform-origin: 50% 0;
+
+  transition:
+    transform 1.45s cubic-bezier(.12,.82,.18,1);
+
+  backface-visibility: hidden;
+}
+
+.flap:after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      100deg,
+      transparent 35%,
+      rgba(255,255,255,.6),
+      transparent 65%
+    );
+
+  transform:
+    translateX(-100%);
+
+  transition:
+    transform .8s ease;
+}
+
+/* ==================================================
+   LACRE M&R
+================================================== */
+
+.wax {
+  position: absolute;
+
+  z-index: 15;
+
+  left: 50%;
+  top: 49%;
+
+  width: 90px;
+  height: 90px;
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #e9cb8d;
+
+  font-size: 28px;
+
+  font-weight: 500;
+
+  background:
+    radial-gradient(
+      circle at 30% 23%,
+      #a44750,
+      #6c2630 56%,
+      #431820
+    );
+
+  box-shadow:
+    inset 6px 6px 9px rgba(255,255,255,.14),
+    inset -8px -9px 12px rgba(0,0,0,.25),
+    0 8px 12px rgba(55,28,22,.3);
+
+  transition:
+    transform .6s ease,
+    opacity .45s ease;
+}
+
+.wax:before {
+  content: "";
+
+  position: absolute;
+
+  inset: 7px;
+
+  border-radius: 50%;
+
+  border:
+    1px solid rgba(242,207,151,.58);
+}
+
+.wax span {
+  position: relative;
+
+  z-index: 2;
+}
+
+/* ==================================================
+   TEXTO "PULSE EL SOBRE"
+================================================== */
+
+.prompt {
+  position: absolute;
+
+  z-index: 7;
+
+  top:
+    calc(
+      50% + min(31vw,185px)
+    );
+
+  text-align: center;
+
+  transition:
+    opacity .6s ease,
+    transform .7s ease;
+}
+
+.prompt .text {
+  font-size:
+    clamp(20px,5vw,30px);
+
+  font-style: italic;
+}
+
+.ornament {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin-top: 9px;
+}
+
+.ornament i {
+  width: 55px;
+  height: 1px;
+
+  background: #b58b4d;
+}
+
+.heart {
+  color: #b58b4d;
+
+  font-size: 16px;
+}
+
+/* ==================================================
+   CONFETI Y PÉTALOS
+================================================== */
+
+.effects {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 25;
+
+  pointer-events: none;
+
+  opacity: 0;
+}
+
+.confetti,
+.petal {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+}
+
+.confetti {
+  width: 7px;
+  height: 12px;
+
+  border-radius: 2px;
+
+  background: #c99a48;
+
+  box-shadow:
+    0 0 8px rgba(201,154,72,.35);
+}
+
+/* Confeti */
+
+.confetti:nth-child(1) {
+  --x: -330px;
+  --y: -260px;
+  --r: 380deg;
+}
+
+.confetti:nth-child(2) {
+  --x: 320px;
+  --y: -250px;
+  --r: -420deg;
+}
+
+.confetti:nth-child(3) {
+  --x: -360px;
+  --y: 60px;
+  --r: 280deg;
+}
+
+.confetti:nth-child(4) {
+  --x: 350px;
+  --y: 90px;
+  --r: -300deg;
+}
+
+.confetti:nth-child(5) {
+  --x: -250px;
+  --y: 300px;
+  --r: 450deg;
+}
+
+.confetti:nth-child(6) {
+  --x: 260px;
+  --y: 290px;
+  --r: -460deg;
+}
+
+.confetti:nth-child(7) {
+  --x: -120px;
+  --y: -330px;
+  --r: 300deg;
+}
+
+.confetti:nth-child(8) {
+  --x: 140px;
+  --y: -340px;
+  --r: -330deg;
+}
+
+.confetti:nth-child(9) {
+  --x: -390px;
+  --y: -120px;
+  --r: 500deg;
+}
+
+.confetti:nth-child(10) {
+  --x: 390px;
+  --y: -100px;
+  --r: -500deg;
+}
+
+.confetti:nth-child(11) {
+  --x: -400px;
+  --y: 190px;
+  --r: 350deg;
+}
+
+.confetti:nth-child(12) {
+  --x: 400px;
+  --y: 210px;
+  --r: -350deg;
+}
+
+/* Pétalos */
+
+.petal {
+  width: 18px;
+  height: 10px;
+
+  border-radius:
+    100% 0 100% 0;
+
+  background: #e6a9a9;
+
+  opacity: .9;
+
+  box-shadow:
+    0 1px 5px rgba(80,45,35,.15);
+}
+
+.petal:nth-child(13) {
+  --x: -280px;
+  --y: -220px;
+  --r: 210deg;
+}
+
+.petal:nth-child(14) {
+  --x: 290px;
+  --y: -190px;
+  --r: -250deg;
+}
+
+.petal:nth-child(15) {
+  --x: -350px;
+  --y: -20px;
+  --r: 280deg;
+}
+
+.petal:nth-child(16) {
+  --x: 350px;
+  --y: 20px;
+  --r: -280deg;
+}
+
+.petal:nth-child(17) {
+  --x: -250px;
+  --y: 240px;
+  --r: 220deg;
+}
+
+.petal:nth-child(18) {
+  --x: 250px;
+  --y: 250px;
+  --r: -220deg;
+}
+
+.petal:nth-child(19) {
+  --x: -120px;
+  --y: 320px;
+  --r: 180deg;
+}
+
+.petal:nth-child(20) {
+  --x: 110px;
+  --y: 320px;
+  --r: -180deg;
+}
+
+.effects i {
+  transform:
+    translate(-50%,-50%);
+}
+
+.opened .effects {
+  opacity: 1;
+}
+
+.opened .effects .confetti,
+.opened .effects .petal {
+  animation:
+    fall 2.4s cubic-bezier(.15,.7,.25,1)
+    forwards;
+}
+
+.opened .effects .petal:nth-child(odd) {
+  animation-duration: 2.8s;
+}
+
+.opened .effects .petal:nth-child(even) {
+  animation-duration: 3.2s;
+}
+
+@keyframes fall {
+
+  0% {
+    transform:
+      translate(-50%,-50%)
+      scale(.2)
+      rotate(0);
+
+    opacity: 0;
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      scale(1)
+      rotate(var(--r));
+
+    opacity: 0;
+  }
+}
+
+/* ==================================================
+   DESTELLO DORADO
+================================================== */
+
+.gold-dust {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 26;
+
+  pointer-events: none;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(221,180,91,.3),
+      transparent 22%
+    );
+}
+
+.opened .gold-dust {
+  opacity: 1;
+
+  animation:
+    glow 1.7s ease forwards;
+}
+
+@keyframes glow {
+
+  0% {
+    transform: scale(.2);
+
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+
+    opacity: 0;
+  }
+}
+
+/* ==================================================
+   INVITACIÓN FINAL
+================================================== */
+
+.revealed {
+  position: absolute;
+
+  z-index: 40;
+
+  width: min(86vw,450px);
+  height: min(77vh,700px);
+
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    translateY(100px)
+    scale(.72)
+    rotate(-3deg);
+
+  box-shadow:
+    0 38px 75px rgba(48,31,20,.4);
+
+  transition:
+    opacity .8s ease 1.15s,
+    transform 1.25s cubic-bezier(.13,.83,.18,1) 1.15s;
+}
+
+.revealed img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.revealed:after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,255,255,.55);
+}
+
+/* ==================================================
+   ANIMACIÓN DE APERTURA
+================================================== */
+
+.opened .envelope-wrap {
+  transform:
+    translateY(-11vh)
+    scale(.84);
+}
+
+.opened .flap {
+  transform:
+    rotateX(178deg);
+}
+
+.opened .flap:after {
+  transform:
+    translateX(100%);
+}
+
+.opened .wax {
+  transform:
+    translate(-50%,-50%)
+    scale(.08)
+    rotate(50deg);
+
+  opacity: 0;
+}
+
+.opened .card-inside {
+  opacity: 1;
+
+  transform:
+    translateY(-5%);
+}
+
+.opened .prompt {
+  opacity: 0;
+
+  transform:
+    translateY(20px);
+}
+
+.opened .revealed {
+  opacity: 1;
+
+  transform:
+    translateY(0)
+    scale(1)
+    rotate(0);
+
+  pointer-events: auto;
+}
+
+/* ==================================================
+   MÓVIL
+================================================== */
+
+@media (max-width:600px) {
+
+  .wax {
+    width: 74px;
+    height: 74px;
+
+    font-size: 23px;
+  }
+
+  .prompt {
+    top:
+      calc(
+        50% + 29vw + 50px
+      );
+  }
+
+  .revealed {
+    width: 89vw;
+    height: 76vh;
+  }
+
+  .confetti:nth-child(1),
+  .confetti:nth-child(3),
+  .confetti:nth-child(5),
+  .confetti:nth-child(9),
+  .confetti:nth-child(11) {
+    --x: -180px;
+  }
+
+  .confetti:nth-child(2),
+  .confetti:nth-child(4),
+  .confetti:nth-child(6),
+  .confetti:nth-child(10),
+  .confetti:nth-child(12) {
+    --x: 180px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<main class="scene" id="scene">
+
+  <!-- ============================================
+       SOBRE
+  ============================================= -->
+
+  <div
+    class="envelope-wrap"
+    id="envelope"
+    role="button"
+    tabindex="0"
+    aria-label="Abrir invitación"
+  >
+
+    <div class="envelope">
+
+      <div class="body"></div>
+
+      <!-- IMAGEN 2: INVITACIÓN -->
+
+      <div class="card-inside">
+
+        <img
+          src="assets/imagen2.png"
+          alt=""
+        >
+
+      </div>
+
+      <!-- Pliegues -->
+
+      <div class="fold-left"></div>
+
+      <div class="fold-right"></div>
+
+      <div class="fold-bottom"></div>
+
+      <!-- Solapa -->
+
+      <div class="flap"></div>
+
+      <!-- Lacre M&R -->
+
+      <div class="wax">
+
+        <span>M&amp;R</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================================
+       TEXTO
+  ============================================= -->
+
+  <div class="prompt">
+
+    <div class="text">
+      Pulse el sobre para abrirlo
+    </div>
+
+    <div class="ornament">
+
+      <i></i>
+
+      <span class="heart">
+        ♥
+      </span>
+
+      <i></i>
+
+    </div>
+
+  </div>
+
+
+  <!-- ============================================
+       CONFETI Y PÉTALOS
+  ============================================= -->
+
+  <div class="effects">
+
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+    <i class="confetti"></i>
+
+    <i class="petal"></i>
+    <i class="petal"></i>
+    <i class="petal"></i>
+    <i class="petal"></i>
+    <i class="petal"></i>
+    <i class="petal"></i>
+    <i class="petal"></i>
+    <i class="petal"></i>
+
+  </div>
+
+
+  <!-- DESTELLO DORADO -->
+
+  <div class="gold-dust"></div>
+
+
+  <!-- ============================================
+       INVITACIÓN QUE APARECE AL ABRIR
+  ============================================= -->
+
+  <div class="revealed">
+
+    <img
+      src="assets/imagen2.png"
+      alt="Invitación de boda de Marc y Rosa"
+    >
+
+  </div>
+
+</main>
+
+
+<script>
+
+const scene =
+  document.getElementById('scene');
+
+const envelope =
+  document.getElementById('envelope');
+
+
+function openInvitation() {
+
+  scene.classList.add('opened');
+
+}
+
+
+envelope.addEventListener(
+  'click',
+  openInvitation
+);
+
+
+envelope.addEventListener(
+  'keydown',
+  (e) => {
+
+    if (
+      e.key === 'Enter' ||
+      e.key === ' '
+    ) {
+
+      e.preventDefault();
+
+      openInvitation();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
