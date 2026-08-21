@@ -857,7 +857,7 @@ body {
       <div class="card-inside">
 
         <img
-          src="image3.png"
+          src="image1.png"
           alt=""
         >
 
@@ -964,6 +964,7 @@ body {
 
 </main>
 
+<audio id="musica" src="musica.mp3" preload="auto"></audio>
 
 <script>
 
@@ -973,10 +974,18 @@ const scene =
 const envelope =
   document.getElementById('envelope');
 
+const musica =
+  document.getElementById('musica');
+
 
 function openInvitation() {
 
   scene.classList.add('opened');
+
+  musica.volume = 0.6;
+  musica.play().catch(err => {
+  console.log('No se pudo reproducir el audio:', err);
+  });
 
 }
 
